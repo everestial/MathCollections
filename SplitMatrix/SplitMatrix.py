@@ -1,4 +1,5 @@
 
+
 import numpy as np
 #np.set_printoptions(precision=1)
 import sys
@@ -24,7 +25,9 @@ def main():
     #np.random.random_integers(3)
     #sys.exit(0)
 
-
+    ## Update the matrix by passing it to a defined function
+    # This function is call recursively (while loop) until the conditions are met ..
+    # .. as indicated in the code below (in section ... ??)
     updated_matrix, checkers, contd = recursive_matrix_generator(my_matrix, id_matrix)
 
     print("\nMarker 01")
@@ -33,8 +36,9 @@ def main():
     print(contd)
     #sys.exit(0)
 
-    count = 0
 
+    ### Create a new function here  ********
+    count = 0
     while contd == False:
         count = count + 1
         my_matrix = updated_matrix
@@ -44,11 +48,17 @@ def main():
         print(checkers)
         print(contd)
 
+
+    ## create a new function here **********
+    # when the condition is true split the matrix and ..
+    # .. run further iterations until at least one of the diagonal element, abs(i) < 0.0001
     if contd == True:
         print("\nContd is True")
         print(checkers)
         zero_position_id = [True if abs(x) < 0.0001 else False for x in checkers]
         print(zero_position_id)
+
+        # find the row, column intersection where the element abs(i) < 0.0001
         zero_position_rc = [zero_position_id.index(True)+1, zero_position_id.index(True)]
         print(zero_position_rc)
         print()
@@ -60,10 +70,14 @@ def main():
         id_matrix_blck_01 = np.identity(len(matrix_blck_01))
         id_matrix_blck_02 = np.identity(len(matrix_blck_02))
 
+        print("new matrix blocks")
         print(matrix_blck_01)
+        print(id_matrix_blck_01)
         print()
         print(matrix_blck_02)
+        print(id_matrix_blck_02)
 
+        ## this is better handled by a dynamic for-loop that passed data to recursive function ****
         updated_matrix_blck_01 = recursive_matrix_generator(matrix_blck_01, id_matrix_blck_01)
         updated_matrix_blck_02 = recursive_matrix_generator(matrix_blck_02, id_matrix_blck_02)
 
@@ -82,7 +96,7 @@ def recursive_matrix_generator(my_matrix, id_matrix):
     # find the multiplier by taking last value of the last row
     #multiplier = my_matrix[3][3]
 
-    print(my_matrix)
+    #print(my_matrix)
 
     my_matrix_len = len(my_matrix)-1
     multiplier = my_matrix[my_matrix_len][my_matrix_len]
